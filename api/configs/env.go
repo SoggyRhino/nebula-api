@@ -62,3 +62,12 @@ func GetEnvLimit() int64 {
 
 	return limit
 }
+
+func GetSentryDSN() string {
+	dsn, exist := os.LookupEnv("SENTRY_DSN")
+	if !exist || dsn == "" {
+		log.Println("Sentry DSN not found, events will not be logged")
+		return ""
+	}
+	return dsn
+}
